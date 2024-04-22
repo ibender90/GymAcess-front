@@ -1,0 +1,28 @@
+
+<div class="register">
+    
+    <form (submit)="register($event)">
+
+        <div>
+            <h1>Register</h1>
+        </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" class="form-control" name="firstname" placeholder="first name" [(ngModel)]="firstname">
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" class="form-control" name="lastname" placeholder="last name" [(ngModel)]="lastname">
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" class="form-control" name="email" placeholder="email" [(ngModel)]="email">
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4"  >
+        <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="password">
+    </div>
+    <div style="padding-bottom: 25px;">
+        <button class="btn btn-primary">Register</button>
+    </div>
+    <div>
+        <button class="btn btn-primary" routerLink="/login">Go to login</button>
+    </div>
+    </form>
+    </div>

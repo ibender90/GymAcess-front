@@ -1,0 +1,17 @@
+<div>
+<h3 style="text-align: center">Welcome!</h3>
+<form class="login" (submit)="login($event)">
+<div data-mdb-input-init class="form-outline mb-4 inpt">
+    <input type="text" class="form-control" name="email" placeholder="email" [(ngModel)]="email">
+</div>
+<div data-mdb-input-init class="form-outline mb-4 inpt"  >
+    <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="password">
+</div>
+<div style="padding-right: 10px;">
+    <button class="btn btn-success">Login</button>
+</div>
+<div >
+    <button class="btn btn-primary" routerLink="/register">Go to register</button>
+</div>
+</form>
+</div>

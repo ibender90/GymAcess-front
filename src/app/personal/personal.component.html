@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+
+<div class="userPage">
+    <ng-container *ngIf="!!user"> 
+        <app-qr-generator [userToQr] = 'user'></app-qr-generator>
+      </ng-container>
+    
+    <div>
+        Hello {{user?.firstName}}
+    </div>
+    <div *ngIf="hasPaidPeriod()">
+        Your abonement is valid untill {{user?.paidPeriod?.dateTo?.substr(0, 10)}}
+    </div>
+</div>

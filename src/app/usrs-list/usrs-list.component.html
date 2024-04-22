@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<div class="search-users-container">
+  <input type="text" [(ngModel)]="lastName" (input)="serachByLastName()" placeholder="last name">
+  <table class="table table-hover table-bordered table-clickable">
+	<thead>
+		<tr>
+			<th scope="col">First name</th>
+			<th scope="col">Last name</th>
+			<th scope="col">email</th>
+		</tr>
+  </thead>
+  <tbody>
+    @for(user of users; track user.id)
+    {   
+        <tr (click)="onEdit(user)">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td> 
+         </tr>
+    }
+  </tbody>
+</table>
+  <div>
+    <button button class="btn btn-outline-secondary" (click)="previousPage()" [disabled]="currentPage===0">Previos</button>
+    <span> Page {{currentPage + 1}} of {{totalPages}} </span>
+    <button button class="btn btn-outline-secondary" (click)="nextPage()" [disabled]="(currentPage + 1)===totalPages">Next</button>
+  </div>
+</div>
+
+<div class="modal" id="myModal" #myModal>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit user</h4>
+          <button type="button" class="btn-close" (click)="closeModel()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <label for="firstName">First name</label>
+              <input type="text" [(ngModel)]="userObj.firstName" class="form-control" placeholder="Name">
+            </div>
+            <div class="col-6">
+              <label for="lastName">Last name</label>
+              <input type="text" [(ngModel)]="userObj.lastName" class="form-control" placeholder="Last name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="email">Email</label>
+              <input type="text" [(ngModel)]="userObj.email" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-6">
+              <label for="">Access until</label>
+              <div style="padding-top: 7px" *ngIf="noPaidPeriod()">No acess</div>
+              <div style="padding-top: 7px">{{userObj.paidPeriod?.dateTo}}</div>
+            </div>
+            <div>
+              <div style="padding-top: 7px;">
+                <button class="btn btn-secondary" (click) = toggleShowDatePicker()>Pick a new paid period</button>
+                </div>
+            </div>
+            
+            <app-ngbd-datepicker-range [user] = 'userObj' [hidden] = showDatePicker >Pick a new paid perid</app-ngbd-datepicker-range>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <div *ngIf="isAdmin()">
+            <button type="button" class="btn btn-warning" (click)="setManager(userObj.id)">Assign manager</button>
+          </div>
+           <div *ngIf="isManager()">
+            <button type="button" class="btn btn-warning" (click)="updateUser(userObj)">Save</button>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
